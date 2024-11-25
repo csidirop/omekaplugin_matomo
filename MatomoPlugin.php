@@ -14,10 +14,6 @@ class MatomoPlugin extends Omeka_Plugin_AbstractPlugin
         'public_head',
     ];
 
-    protected $_options = [
-        'template_option'=>'option_value'
-    ];
-
     /**
      * Display the configuration form.
      */
@@ -31,18 +27,21 @@ class MatomoPlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookConfig($args): void
     {
-        $option = trim($args['post']['template_option']);
-        set_option('template_option', $option);
+        set_option('matomoURL', trim($args['post']['matomo-url']));
+        set_option('matomoSiteId', trim($args['post']['matomo-site-id']));
     }
 
     /**
-     * Adds code to every public page head
+     * Adds the motomo snipped to every public page head
      * 
      * @param mixed $args
      * @return void
      */
     public function hookPublicHead($args): void 
     {
-       // Code
+        queue_js_string("matomoURL = '". get_option('matomoURL') ."';");
+        queue_js_string("matomoSiteId = '". get_option('matomoSiteId') ."';");
+
+        queue_js_file('matomo');
     }
 }
