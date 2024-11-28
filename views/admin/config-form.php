@@ -12,7 +12,7 @@
         <p class="explanation">
             <?php echo __('This is the Matomo server URL.'); ?>
         </p>
-        <?php echo get_view()->formInput('matomo-url', $matomoURL); ?>
+        <?php echo get_view()->formText('matomo-url', $matomoURL); ?>
     </div>
     <div class="two columns alpha">
         <?php echo get_view()->formLabel('matomo-site-id', __('Matomo Site Id')); ?>
@@ -21,6 +21,6 @@
         <p class="explanation">
             <?php echo __('This is the site ID for this omeka instance.'); ?>
         </p>
-        <?php echo get_view()->formInput('matomo-site-id', $matomoSiteId); ?>
+        <?php echo get_view()->formText('matomo-site-id', $matomoSiteId); ?>
     </div>
 </div>
