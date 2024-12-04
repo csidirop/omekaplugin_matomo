@@ -33,14 +33,8 @@ class MatomoPlugin extends Omeka_Plugin_AbstractPlugin
         // Optional parameter:
         set_option('trackingAllSubdomains', trim($args['post']['tracking-all-subdomains']));
         set_option('trackingGroupByDomain', trim($args['post']['tracking-group-by-domain']));
-
-        debug(trim($args['post']['tracking-group-by-domain']));
-
-        if (trim($args['post']['tracking-group-by-domain'])) {
-            debug("true");
-        } else {
-            debug("false");
-        }
+        set_option('trackingAllAliases', trim($args['post']['tracking-all-aliases']));
+        set_option('trackingNoscript', trim($args['post']['tracking-noscript']));
     }
 
     /**
@@ -51,11 +45,17 @@ class MatomoPlugin extends Omeka_Plugin_AbstractPlugin
      */
     public function hookPublicHead($args): void 
     {
+        // Additional parameter:
         queue_js_string("matomoURL = '". get_option('matomoURL') ."';");
         queue_js_string("matomoSiteId = '". get_option('matomoSiteId') ."';");
+        queue_js_string("domain = '". "TODO" ."';"); //TODO get domain
 
         queue_js_string("trackingAllSubdomains = '". get_option('trackingAllSubdomains') ."';");
+        queue_js_string("trackingGroupByDomain = '". get_option('trackingGroupByDomain') ."';");
+        queue_js_string("trackingAllAliases = '". get_option('trackingAllAliases') ."';");
+        queue_js_string("trackingNoscript = '". get_option('trackingNoscript') ."';");
 
+        // Main js-file:
         queue_js_file('matomo');
     }
 }

@@ -1,11 +1,14 @@
 jQuery(document).ready(function () {
-
-    // alert("matomoURL: " + matomoURL);
-    // alert("matomoSiteId: " + matomoSiteId);
+    var domain = document.domain; // TODO: temp solution
+    var url = new URL(window.location.href); // TODO: temp solution
+    var domainAndPath = `${url.hostname}/${url.pathname.split('/').filter(Boolean)[0] || ''}`;
 
     // <!-- Matomo -->
     var _paq = window._paq = window._paq || [];
     /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+    if(trackingAllSubdomains) { _paq.push(["setCookieDomain", "*." + domain]); };                       // tracking-all-subdomains
+    if(trackingGroupByDomain) { _paq.push(["setDocumentTitle", domain + "/" + document.title]); };      // tracking-group-by-domain
+    if(trackingAllAliases) { _paq.push(["setDomains", ["*." + domainAndPath]]);};                       // tracking-all-aliases
     _paq.push(['trackPageView']);
     _paq.push(['enableLinkTracking']);
     (function() {
@@ -16,4 +19,20 @@ jQuery(document).ready(function () {
         g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
     })();
     // <!-- End Matomo Code -->
+
+    if(trackingNoscript) { // tracking-noscript
+        const noscriptEle = document.createElement('noscript');
+        const paragraphEle = document.createElement('p');
+        const imgEle = document.createElement('img');
+
+        // Set attributes for the <img> element
+        imgEle.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+        imgEle.setAttribute('src', `${matomoURL}/matomo.php?idsite=${matomoSiteId}&rec=1`);
+        imgEle.setAttribute('style', 'border:0;');
+        imgEle.setAttribute('alt', '');
+
+        paragraphEle.appendChild(imgEle);
+        noscriptEle.appendChild(paragraphEle);
+        document.body.appendChild(noscriptEle);
+    }
 });
