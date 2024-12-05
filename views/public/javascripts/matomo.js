@@ -9,6 +9,14 @@ jQuery(document).ready(function () {
     if(trackingAllSubdomains) { _paq.push(["setCookieDomain", "*." + domain]); };                       // tracking-all-subdomains
     if(trackingGroupByDomain) { _paq.push(["setDocumentTitle", domain + "/" + document.title]); };      // tracking-group-by-domain
     if(trackingAllAliases) { _paq.push(["setDomains", ["*." + domainAndPath]]);};                       // tracking-all-aliases
+    if(trackingVisitorCvCheck) { _paq.push(["setCustomVariable", 1, trackingVisitorCvCheck.NAME, trackingVisitorCvCheck.WERT, "visit"]); }; // tracking-visitor-cv-check
+    if(trackingDoNotTrack) { _paq.push(["setDoNotTrack", true]); };                                     // tracking-do-not-track
+    if(trackingDisableCookies) { _paq.push(["disableCookies"]); };                                      // tracking-do-not-track
+    if(trackingRequireConsentForCampaignTracking) { _paq.push(["disableCampaignParameters"]); };        // tracking-require-consent-for-campaign-tracking 
+    if(trackingCustomCampaignQueryParamsCheck) {                                                        // tracking-custom-campaign-query-params-check
+        _paq.push(["setCampaignNameKey", trackingCustomCampaignQueryParamsCheck.NAME]);
+        _paq.push(["setCampaignKeywordKey", trackingCustomCampaignQueryParamsCheck.PARAMETER]);
+    }
     _paq.push(['trackPageView']);
     _paq.push(['enableLinkTracking']);
     (function() {

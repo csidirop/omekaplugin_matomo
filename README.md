@@ -6,7 +6,7 @@ This plugin integrates [Matomo Analytics](https://github.com/matomo-org/matomo) 
 
 - Adds Matomo tracking code to all public-facing Omeka pages.
 - Tracks user interactions and provides insights through the Matomo dashboard.
-- *(Maybe in the future: Customizable tracking settings within the configuration panel.)*
+- Customizable tracking settings within the configuration panel.
 
 ## Requirements
 
@@ -21,7 +21,18 @@ This plugin integrates [Matomo Analytics](https://github.com/matomo-org/matomo) 
 4. Configure the plugin by entering your **Matomo instance URL**  and **Site ID**.
    - Your Matomo instance URL (e.g., `https://analytics.example.com`).
    - Your Site ID from Matomo (found in the Matomo admin panel under **Settings > Websites**).
-   - *(Maybe in the future: Customize tracking options such as anonymizing IPs or enabling consent.)*
+   - Optional: Customize tracking options:
+      - Track visitors across all subdomains
+      - Prepend the site domain to the page title when tracking
+      - In the "Outlinks" report, hide clicks to known alias URLs of this site
+      - Track users with JavaScript disabled
+      - Track custom variables for this visitor *
+      - Enable client side DoNotTrack detection
+      - Disable all tracking cookies
+      - Disable Campaign Parameters Tracking
+      - Use custom query parameter names for the campaign name and keyword *
+
+_(* Not working at this time)_
 
 ## Usage
 
